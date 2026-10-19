@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>UMBRAFORGE — студия разработки игр</title>
+<meta name="description" content="UMBRAFORGE — студия разработки игр: от прототипа до релиза на PC, консолях и мобильных платформах.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🌑</text></svg>">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;700&family=Unbounded:wght@500;700;900&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#07050d;--surface:#110c1d;--line:#2a1f45;--violet:#8b5cf6;--glow:#c4a7ff;--text:#ece8f6;--muted:#9b93b3;--r:18px}
+*{box-sizing:border-box;margin:0}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--text);font:400 17px/1.65 Manrope,system-ui,sans-serif;overflow-x:hidden}
+h1,h2,h3{font-family:Unbounded,sans-serif;line-height:1.1}
+a{color:inherit;text-decoration:none}
+:focus-visible{outline:2px solid var(--glow);outline-offset:3px}
+.wrap{width:min(1120px,92%);margin:auto}
+section{padding:110px 0}
+h2{font-size:clamp(1.8rem,4vw,2.8rem);font-weight:700;margin-bottom:18px}
+.lead{color:var(--muted);max-width:60ch;margin-bottom:48px}
+/* nav */
+nav{position:fixed;inset:0 0 auto;z-index:50;transition:.35s;padding:18px 0}
+nav.solid{background:rgba(7,5,13,.82);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);padding:12px 0}
+nav .wrap{display:flex;justify-content:space-between;align-items:center;gap:20px}
+.logo{font:900 1.1rem Unbounded;letter-spacing:.04em}.logo b{color:var(--violet)}
+.links{display:flex;gap:26px;font-size:.95rem;color:var(--muted)}
+.links a{transition:.25s}.links a:hover{color:var(--glow)}
+.btn{display:inline-block;padding:14px 28px;border-radius:999px;background:var(--violet);color:#fff;font-weight:700;border:0;cursor:pointer;font:700 1rem Manrope;transition:.3s;position:relative}
+.btn:hover{background:#a47bff;box-shadow:0 0 36px rgba(139,92,246,.55);transform:translateY(-2px)}
+.btn.ghost{background:transparent;border:1px solid var(--line)}.btn.ghost:hover{border-color:var(--violet);box-shadow:none}
+/* hero */
+#hero{min-height:100vh;display:flex;align-items:center;position:relative;padding:120px 0 80px}
+#fx{position:absolute;inset:0;width:100%;height:100%}
+#hero .wrap{position:relative;pointer-events:none}#hero .wrap *{pointer-events:auto}
+#hero h1{font-size:clamp(2.6rem,8.5vw,6.6rem);font-weight:900;letter-spacing:-.02em}
+#hero h1 span{display:block;color:transparent;-webkit-text-stroke:1.5px var(--glow)}
+#hero p{max-width:52ch;margin:28px 0 38px;color:var(--muted);font-size:1.15rem}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.hl{opacity:0;transform:translateY(30px);animation:in .9s cubic-bezier(.2,.7,.2,1) forwards}
+.hl:nth-child(2){animation-delay:.15s}.hl:nth-child(3){animation-delay:.3s}.hl:nth-child(4){animation-delay:.45s}
+@keyframes in{to{opacity:1;transform:none}}
+/* about */
+.about{max-width:820px}
+.about p{color:var(--muted);margin-bottom:18px}
+.skills{display:flex;flex-wrap:wrap;gap:10px;margin-top:26px}
+.skills li{list-style:none;padding:8px 16px;border:1px solid var(--line);border-radius:999px;font-size:.9rem;transition:.25s}
+.skills li:hover{border-color:var(--violet);background:rgba(139,92,246,.12)}
+/* projects */
+.grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(310px,1fr));gap:24px}
+.card{background:var(--surface);border:1px solid var(--line);border-radius:var(--r);overflow:hidden;transition:transform .25s ease,border-color .3s,box-shadow .3s;transform-style:preserve-3d;will-change:transform}
+.card{position:relative;background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(139,92,246,0),transparent 60%),var(--surface)}
+.card::before{content:"";position:absolute;inset:0 0 auto;height:3px;background:linear-gradient(90deg,var(--violet),var(--glow));transform:scaleX(0);transform-origin:left;transition:transform .5s cubic-bezier(.2,.7,.2,1)}
+.card:hover::before{transform:scaleX(1)}
+.card:hover{border-color:var(--violet);box-shadow:0 20px 60px rgba(139,92,246,.22);background:radial-gradient(circle at var(--mx,50%) var(--my,0%),rgba(139,92,246,.2),transparent 60%),var(--surface)}
+.body{padding:30px 26px 26px}
+.body h3{font-size:1.25rem;margin-bottom:8px}
+.body p{color:var(--muted);font-size:.95rem;margin-bottom:14px}
+.tags{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}.tags span{font-size:.8rem;color:var(--glow);background:rgba(139,92,246,.14);padding:3px 12px;border-radius:999px}
+.row{display:flex;gap:10px}.row a{flex:1;text-align:center;padding:11px;border-radius:12px;border:1px solid var(--line);font-size:.92rem;font-weight:700;transition:.25s}
+.row a:first-child{background:var(--violet);border-color:var(--violet)}.row a:hover{border-color:var(--glow);transform:translateY(-2px)}
+/* gallery */
+.gal{display:grid;grid-template-columns:repeat(4,1fr);grid-auto-rows:200px;gap:14px}
+.gal figure{position:relative;border-radius:var(--r);overflow:hidden;background:var(--g);border:1px solid var(--line);cursor:zoom-in}
+.gal figure:nth-child(1),.gal figure:nth-child(6){grid-column:span 2;grid-row:span 2}
+.gal img{width:100%;height:100%;object-fit:cover;transition:transform .7s}
+.gal figure:hover img{transform:scale(1.1)}
+.gal figcaption{position:absolute;inset:auto 0 0;padding:34px 16px 14px;font-size:.9rem;background:linear-gradient(transparent,rgba(7,5,13,.92));transform:translateY(100%);transition:.35s}
+.gal figure:hover figcaption{transform:none}
+#lb{position:fixed;inset:0;background:rgba(5,3,10,.92);display:none;place-items:center;z-index:100;cursor:zoom-out}
+#lb.on{display:grid}#lb img{max-width:90vw;max-height:88vh;border-radius:14px}
+/* social */
+.soc{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:16px}
+.soc a{display:flex;align-items:center;gap:12px;padding:18px 20px;background:var(--surface);border:1px solid var(--line);border-radius:var(--r);transition:.3s}
+.soc a:hover{border-color:var(--violet);transform:translateY(-4px);box-shadow:0 14px 40px rgba(139,92,246,.2)}
+.soc svg{width:26px;height:26px;fill:var(--glow);flex:none}
+/* form */
+.form-box{display:grid;grid-template-columns:1fr 1.2fr;gap:56px}
+form{background:var(--surface);border:1px solid var(--line);border-radius:24px;padding:34px;display:grid;gap:18px}
+label{display:grid;gap:7px;font-size:.9rem;color:var(--muted)}
+input,select,textarea{width:100%;background:var(--bg);border:1px solid var(--line);border-radius:12px;padding:13px 15px;color:var(--text);font:inherit;transition:.25s}
+input:focus,select:focus,textarea:focus{outline:none;border-color:var(--violet);box-shadow:0 0 0 4px rgba(139,92,246,.2)}
+textarea{min-height:110px;resize:vertical}
+.hp{position:absolute;left:-9999px}
+#status{min-height:1.4em;font-size:.95rem}.ok{color:#7ee2a8}.err{color:#ff8da1}
+footer{border-top:1px solid var(--line);padding:34px 0;color:var(--muted);font-size:.9rem;text-align:center}
+.rv{opacity:0;transform:translateY(26px);transition:opacity .8s,transform .8s cubic-bezier(.2,.7,.2,1)}.rv.on{opacity:1;transform:none}
+@media(max-width:860px){.links{display:none}.form-box{grid-template-columns:1fr;gap:34px}.gal{grid-template-columns:repeat(2,1fr)}section{padding:80px 0}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;transition:none!important}.hl,.rv{opacity:1;transform:none}html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<nav id="nav"><div class="wrap">
+  <a class="logo" href="#hero">UMBRA<b>FORGE</b></a>
+  <div class="links"><a href="#about">О нас</a><a href="#projects">Проекты</a><a href="#gallery">Галерея</a><a href="#social">Соцсети</a></div>
+  <a class="btn" href="#contact">Консультация</a>
+</div></nav>
+
+<header id="hero">
+  <canvas id="fx" aria-hidden="true"></canvas>
+  <div class="wrap">
+    <h1 class="hl">UMBRAFORGE<span>game studio</span></h1>
+    <p class="hl">Мы выковываем игры из тени: придумываем миры, делаем рабочие прототипы и доводим проекты до релиза на PC, консолях и мобильных устройствах.</p>
+    <div class="cta hl"><a class="btn" href="#contact">Обсудить проект</a><a class="btn ghost" href="#projects">Смотреть работы</a></div>
+  </div>
+</header>
+
+<section id="about"><div class="wrap about">
+  <div class="rv">
+    <h2>Команда, которая доводит игры до релиза</h2>
+    <p>UMBRAFORGE — независимая студия разработки игр. Мы работаем с идеей на любом этапе: от концепт-документа до поддержки после запуска. В команде геймдизайнеры, программисты, 2D/3D-художники и QA-инженеры.</p>
+    <p>Делаем игры на Unity, Unreal Engine и Godot. Берём проекты под ключ или усиливаем вашу команду: прототипирование, разработка механик, оптимизация, портирование, live-ops.</p>
+    <p>Работаем итерациями: каждые две недели вы получаете играбельную сборку и можете влиять на результат.</p>
+    <ul class="skills"><li>Unity</li><li>Unreal Engine</li><li>Godot</li><li>Xcode</li><li>UX/UI дизайн</li><li>Rive</li><li>3D и 2D арт</li><li>QA и оптимизация</li></ul>
+  </div>
+</div></section>
+
+<section id="projects"><div class="wrap">
+  <h2 class="rv">Проекты</h2>
+  <p class="lead rv">Игры и веб-приложения, которые мы разработали.</p>
+  <div class="grid">
+    <article class="card rv"><div class="body">
+      <h3>Морской бой</h3><p>Стратегическая игра для двух игроков, в которой соперники по очереди называют координаты на игровом поле противника, пытаясь потопить все его скрытые корабли.</p>
+      <div class="tags"><span>HTML</span><span>CSS</span><span>JS</span></div>
+      <div class="row"><a href="https://battleship-lac-three.vercel.app/" target="_blank" rel="noopener">Открыть проект</a></div></div></article>
+    <article class="card rv"><div class="body">
+      <h3>Чат-бот для Telegram</h3><p>Интерактивный аниме-бот с Нацуки, с которым можно общаться, играть и узнавать её секреты.</p>
+      <div class="tags"><span>Python</span><span>Telegram</span></div>
+      <div class="row"><a href="https://web.telegram.org/k/#@NatsukiVCChatBot" target="_blank" rel="noopener">Открыть проект</a></div></div></article>
+    <article class="card rv"><div class="body">
+      <h3>StarCatch</h3><p>Интерактивная игра для поиска и отслеживания звезд.</p>
+      <div class="tags"><span>React</span><span>API</span></div>
+      <div class="row"><a href="https://github.com/montegl0ver/StarCatch" target="_blank" rel="noopener">GitHub</a></div></div></article>
+  </div>
+</div></section>
+
+<section id="gallery"><div class="wrap">
+  <h2 class="rv">Галерея</h2>
+  <p class="lead rv">Скриншоты, арт и кадры из жизни студии. Нажмите на фото, чтобы открыть его крупно.</p>
+  <div class="gal rv">
+    <figure style="--g:linear-gradient(135deg,#2e1065,#8b5cf6)"><img src="images/photo1.jpg" alt="Фото 1" loading="lazy"><figcaption>Морской бой </figcaption></figure>
+    <figure style="--g:linear-gradient(135deg,#1e1b4b,#6d28d9)"><img src="images/photo2.jpg" alt="Фото 2" loading="lazy"><figcaption>Морской бой</figcaption></figure>
+    <figure style="--g:linear-gradient(135deg,#3b0764,#a78bfa)"><img src="images/photo3.jpg" alt="Фото 3" loading="lazy"><figcaption>Чат-бот для Telegram</figcaption></figure>
+    <figure style="--g:linear-gradient(135deg,#17102e,#7c3aed)"><img src="images/photo4.jpg" alt="Фото 4" loading="lazy"><figcaption>Ala-Too Survey System</figcaption></figure>
+    <figure style="--g:linear-gradient(135deg,#4c1d95,#c4b5fd)"><img src="images/photo5.jpg" alt="Фото 5" loading="lazy"><figcaption>Космошутер NeonVoid</figcaption></figure>
+    <figure style="--g:linear-gradient(135deg,#1a1033,#5b21b6)"><img src="images/photo6.jpg" alt="Фото 6" loading="lazy"><figcaption>Наша команда на собрании</figcaption></figure>
+  </div>
+</div></section>
+<div id="lb"><img alt=""></div>
+
+<section id="social"><div class="wrap">
+  <h2 class="rv">Мы в сети</h2>
+  <p class="lead rv">Следите за новостями и проектами.</p>
+  <div class="soc rv">
+    <a href="https://t.me/n0th0m0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M9.8 15.6l-.4 4.2c.6 0 .8-.3 1.1-.6l2.6-2.5 5.4 4c1 .5 1.7.2 2-.9L24 3.6c.3-1.4-.5-2-1.5-1.600L1.600 10C.2 10.500.2 11.300 1.400 11.700l5.400 1.700L19.300 5.500c.6-.4 1.100-.2.700.2z"/></svg>Telegram</a>
+    <a href="https://github.com/montegl0ver" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 .5a11.500 11.500 0 00-3.600 22.400c.6.100.8-.3.800-.6v-2c-3.200.7-3.900-1.500-3.900-1.500-.5-1.300-1.300-1.700-1.300-1.700-1-.7.100-.7.100-.7 1.200.1 1.800 1.200 1.800 1.200 1 1.800 2.700 1.300 3.300 1 .1-.8.400-1.300.7-1.600-2.600-.3-5.300-1.300-5.300-5.700 0-1.300.5-2.300 1.200-3.100-.1-.3-.5-1.500.1-3.100 0 0 1-.3 3.200 1.200a11 11 0 015.800 0C17 5.700 18 6 18 6c.6 1.600.2 2.800.1 3.100.8.800 1.200 1.800 1.200 3.100 0 4.400-2.700 5.400-5.300 5.700.4.400.8 1.100.8 2.200v3.200c0 .3.200.7.800.6A11.500 11.500 0 0012 .5z"/></svg>GitHub</a>
+    <a href="https://instagram.com/wokespector" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>Instagram</a>
+    <a href="https://discord.gg/ayoitsaiya" target="_blank" rel="noopener"><svg viewBox="0 0 24 24"><path d="M20.300 4.400A19.800 19.800 0 0015.400 3l-.6 1.300a18.400 18.400 0 00-5.600 0L8.600 3a19.800 19.800 0 00-4.900 1.400C.600 9 -.200 13.500.200 17.900a19.900 19.900 0 006 3l1.300-2.100c-.7-.3-1.400-.6-2-1l.5-.4a14.200 14.200 0 0012.200 0l.5.400c-.6.400-1.300.7-2 1l1.300 2.100a19.900 19.900 0 006-3c.5-5.100-.8-9.600-3.700-13.500zM8 15.200c-1.200 0-2.100-1.100-2.100-2.400S6.800 10.400 8 10.400s2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400zm8 0c-1.200 0-2.100-1.100-2.100-2.400s.9-2.400 2.100-2.400 2.100 1.100 2.100 2.400-.9 2.400-2.100 2.400z"/></svg>Discord</a>
+  </div>
+</div></section>
+
+<section id="contact"><div class="wrap form-box">
+  <div class="rv">
+    <h2>Запишитесь на консультацию</h2>
+    <p class="lead">Расскажите об идее, и мы ответим в течение рабочего дня: оценим сроки, бюджет и предложим технологии.</p>
+  </div>
+  <form id="f" class="rv" novalidate>
+    <label>Ваше имя<input name="name" required maxlength="80" autocomplete="name" placeholder="Анна"></label>
+    <label>Telegram или телефон<input name="contact" required maxlength="80" placeholder="@username или +996…"></label>
+    <label>Тип проекта<select name="type"><option>Мобильная игра</option><option>PC / консоли</option><option>Браузерная игра</option><option>Усиление команды</option><option>Другое</option></select></label>
+    <label>О проекте<textarea name="msg" maxlength="1000" placeholder="Кратко опишите идею, сроки и бюджет"></textarea></label>
+    <input class="hp" name="site" tabindex="-1" autocomplete="off" aria-hidden="true">
+    <button class="btn" id="send" type="submit">Отправить заявку</button>
+    <div id="status" role="status" aria-live="polite"></div>
+  </form>
+</div></section>
+
+<footer>© <span id="y"></span> UMBRAFORGE. Все права защищены.</footer>
+
+<script>
+/* ===== НАСТРОЙКА TELEGRAM ===== */
+const TG = {
+  BOT_TOKEN: "8656286983:AAFn1tzHmyfWhLgH2DjMxVA1cob3v2bDo8o",
+  CHAT_ID:   "6280788060"
+};
+
+document.getElementById("y").textContent = new Date().getFullYear();
+const nav = document.getElementById("nav");
+addEventListener("scroll", () => nav.classList.toggle("solid", scrollY > 40), {passive:true});
+
+/* появление блоков при скролле */
+const io = new IntersectionObserver(es => es.forEach(e => {
+  if (!e.isIntersecting) return;
+  e.target.classList.add("on");
+  io.unobserve(e.target);
+}), {threshold:.15});
+document.querySelectorAll(".rv").forEach(el => io.observe(el));
+
+/* наклон карточек и подсветка за курсором */
+document.querySelectorAll(".card").forEach(c => {
+  c.addEventListener("pointermove", e => {
+    const r = c.getBoundingClientRect(), x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+    c.style.transform = `perspective(900px) rotateX(${(.5 - y) * 7}deg) rotateY(${(x - .5) * 9}deg) translateY(-4px)`;
+    c.style.setProperty("--mx", x * 100 + "%"); c.style.setProperty("--my", y * 100 + "%");
+  });
+  c.addEventListener("pointerleave", () => c.style.transform = "");
+});
+
+/* галерея: скрыть битые изображения, лайтбокс */
+const lb = document.getElementById("lb"), lbi = lb.querySelector("img");
+document.querySelectorAll(".gal figure").forEach(f => {
+  const im = f.querySelector("img");
+  im.addEventListener("error", () => im.remove());
+  f.addEventListener("click", () => { if (!f.querySelector("img")) return; lbi.src = im.src; lbi.alt = im.alt; lb.classList.add("on"); });
+});
+lb.addEventListener("click", () => lb.classList.remove("on"));
+addEventListener("keydown", e => e.key === "Escape" && lb.classList.remove("on"));
+
+/* фон hero: частицы, реагирующие на курсор */
+(function(){
+  const cv = document.getElementById("fx"), ctx = cv.getContext("2d");
+  if (matchMedia("(prefers-reduced-motion:reduce)").matches) return;
+  let W, H, P = [], m = {x:-999, y:-999};
+  function size(){ W = cv.width = cv.offsetWidth; H = cv.height = cv.offsetHeight;
+    P = Array.from({length: Math.min(110, W / 12)}, () => ({x:Math.random()*W, y:Math.random()*H, vx:(Math.random()-.5)*.35, vy:(Math.random()-.5)*.35})); }
+  size(); addEventListener("resize", size);
+  cv.parentElement.addEventListener("pointermove", e => { const r = cv.getBoundingClientRect(); m.x = e.clientX - r.left; m.y = e.clientY - r.top; });
+  (function loop(){
+    ctx.clearRect(0, 0, W, H);
+    for (const p of P){
+      const dx = p.x - m.x, dy = p.y - m.y, d = Math.hypot(dx, dy);
+      if (d < 140){ p.x += dx / d * 1.6; p.y += dy / d * 1.6; }
+      p.x += p.vx; p.y += p.vy;
+      if (p.x < 0 || p.x > W) p.vx *= -1; if (p.y < 0 || p.y > H) p.vy *= -1;
+      ctx.fillStyle = "rgba(196,167,255,.8)"; ctx.beginPath(); ctx.arc(p.x, p.y, 1.8, 0, 7); ctx.fill();
+    }
+    for (let i = 0; i < P.length; i++) for (let j = i + 1; j < P.length; j++){
+      const d = Math.hypot(P[i].x - P[j].x, P[i].y - P[j].y);
+      if (d < 120){ ctx.strokeStyle = `rgba(139,92,246,${.28 * (1 - d / 120)})`; ctx.beginPath(); ctx.moveTo(P[i].x, P[i].y); ctx.lineTo(P[j].x, P[j].y); ctx.stroke(); }
+    }
+    requestAnimationFrame(loop);
+  })();
+})();
+
+/* отправка формы в Telegram */
+const f = document.getElementById("f"), st = document.getElementById("status"), btn = document.getElementById("send");
+const esc = s => s.replace(/[&<>]/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;"}[c]));
+f.addEventListener("submit", async e => {
+  e.preventDefault();
+  const d = Object.fromEntries(new FormData(f));
+  st.className = "";
+  if (d.site) return;                                   // защита от ботов
+  if (!d.name.trim() || !d.contact.trim()){ st.className = "err"; st.textContent = "Укажите имя и контакт для связи."; return; }
+  if (Date.now() - (+localStorage.getItem("lastSend") || 0) < 30000){ st.className = "err"; st.textContent = "Подождите 30 секунд перед повторной отправкой."; return; }
+  btn.disabled = true; btn.textContent = "Отправляем…";
+  const text = `<b>Новая заявка на консультацию</b>\n\nИмя: ${esc(d.name)}\nКонтакт: ${esc(d.contact)}\nТип проекта: ${esc(d.type)}\nО проекте: ${esc(d.msg || "не указано")}`;
+  try{
+    const r = await fetch(`https://api.telegram.org/bot${TG.BOT_TOKEN}/sendMessage`, {
+      method:"POST", headers:{"Content-Type":"application/json"},
+      body: JSON.stringify({chat_id: TG.CHAT_ID, text, parse_mode:"HTML"})
+    });
+    if (!(await r.json()).ok) throw 0;
+    localStorage.setItem("lastSend", Date.now());
+    st.className = "ok"; st.textContent = "Заявка отправлена. Мы свяжемся с вами в течение рабочего дня."; f.reset();
+  }catch{
+    st.className = "err"; st.textContent = "Не удалось отправить заявку. Проверьте подключение и попробуйте ещё раз.";
+  }
+  btn.disabled = false; btn.textContent = "Отправить заявку";
+});
+</script>
+</body>
+</html>
